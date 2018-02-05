@@ -56,9 +56,9 @@ public class Recursion {
             real = real.substring(0, real.indexOf(".") + precision);
         }catch (Exception e) {}
         
-        return real.equals(aprox);
+        //return real.equals(aprox);
         // faster method to check precision, but 0 is broken because the inital guess is greater than 0 
-        //return Math.abs(actual - guess) < Math.pow(10, -precision);
+        return Math.abs(actual - guess) < Math.pow(10, -precision);
     }
     
     public static void main(String[] args) {
