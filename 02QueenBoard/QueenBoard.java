@@ -28,6 +28,7 @@ public class QueenBoard {
     
     public boolean addQueen(int r, int c) {
         if (board[r][c] == 0) {
+            queenThreat(r,c,1);
             board[r][c] = -1;
             return true;
         }
@@ -36,10 +37,29 @@ public class QueenBoard {
     
     public boolean removeQueen(int r, int c) {
         if (board[r][c] == -1) {
+            queenThreat(r,c,-1);
             board[r][c] = 0;
             return true;
         }
         return false;
+    }
+    
+    public void queenThreat(int r, int c, int incre) {
+        for (int row = r; row < board.length; row++) {
+            if (board[row][c] >= 0) {
+                board[row][c] += incre;
+            }
+        }
+        for (int col = c; col < board[r].length; col++) {
+            if (board[r][col] >= 0) {
+                board[r][col] += incre;
+            }
+        }
+        for (int diag = 0; diag + r < board.length && diag + c < board.length; diag++) {
+            if (board[r+diag][c+diag] >= 0) {
+                board[r+diag][c+diag] += incre;
+            }
+        }
     }
     
     public boolean solve() {
