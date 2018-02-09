@@ -12,8 +12,8 @@ public class QueenBoard {
     
     public String toString() {
         String returnStr = "";
-        for (int r = 0; r < size; r++) {
-            for (int c = 0; c < size; c++) {
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board[r].length; c++) {
                 int num = board[r][c];
                 if (num == -1) {
                     returnStr += "Q ";
