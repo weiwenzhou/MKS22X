@@ -1,8 +1,13 @@
 public class QueenBoard {
     private int[][] board;
 
-    public QueenBoard() {
-        
+    public QueenBoard(int size) {
+        board = new int[size][size];
+        for (int r = 0; r < size; r++) {
+            for (int c = 0; c < size; c++) {
+                board[r][c] = 0;
+            }
+        }
     }
     
     public String toString() {
