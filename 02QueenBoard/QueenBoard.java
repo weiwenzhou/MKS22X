@@ -26,12 +26,20 @@ public class QueenBoard {
         return returnStr;
     }
     
-    private boolean addQueen(int r, int c) {
-        return true;
+    public boolean addQueen(int r, int c) {
+        if (board[r][c] == 0) {
+            board[r][c] = -1;
+            return true;
+        }
+        return false;
     }
     
-    private boolean removeQueen(int r, int c) {
-        return true;
+    public boolean removeQueen(int r, int c) {
+        if (board[r][c] == -1) {
+            board[r][c] = 0;
+            return true;
+        }
+        return false;
     }
     
     public boolean solve() {
@@ -46,5 +54,12 @@ public class QueenBoard {
         QueenBoard qb = new QueenBoard(5);
         
         System.out.println(qb);
+        System.out.println(qb.addQueen(1,1));
+        System.out.println(qb.addQueen(2,3));
+        System.out.println(qb);
+        System.out.println(qb.removeQueen(2,3));
+        System.out.println(qb.removeQueen(2,0));
+        System.out.println(qb);
+        //System.out.println(qb);
     }
 }
