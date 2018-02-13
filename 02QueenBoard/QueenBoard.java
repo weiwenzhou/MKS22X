@@ -78,9 +78,10 @@ public class QueenBoard {
             return true;
         }
         for (int col = 0; col < board[row].length; col++) {
-            addQueen(row, col);
-            if (solve(row+1)) {
-                return true;
+            if (addQueen(row, col)) {
+                if (solve(row+1)) {
+                    return true;
+                }
             }
             removeQueen(row, col);
         }
@@ -95,7 +96,7 @@ public class QueenBoard {
         QueenBoard qb = new QueenBoard(5);
         
         System.out.println(qb);
-        Sytem.out.println(qb.solve());
+        System.out.println(qb.solve());
         System.out.println(qb);
         // System.out.println(qb.addQueen(1,1));
         // System.out.println(qb.addQueen(2,3));
