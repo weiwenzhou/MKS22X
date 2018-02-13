@@ -18,7 +18,7 @@ public class QueenBoard {
                 if (num == -1) {
                     returnStr += "Q ";
                 } else {
-                    returnStr += num + " ";//"_ ";
+                    returnStr += "_ ";
                 }
             }
             returnStr += "\n";
