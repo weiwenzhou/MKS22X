@@ -46,19 +46,16 @@ public class QueenBoard {
     
     public void queenThreat(int r, int c, int incre) {
         for (int row = r; row < board.length; row++) {
-            if (board[row][c] >= 0) {
-                board[row][c] += incre;
-            }
+            board[row][c] += incre;
         }
         for (int col = c; col < board[r].length; col++) {
-            if (board[r][col] >= 0) {
-                board[r][col] += incre;
-            }
+            board[r][col] += incre;
         }
         for (int diag = 0; diag + r < board.length && diag + c < board.length; diag++) {
-            if (board[r+diag][c+diag] >= 0) {
-                board[r+diag][c+diag] += incre;
-            }
+            board[r+diag][c+diag] += incre;
+        }
+        for (int diag = 0; diag + r < board.length && c - diag >= 0; diag++) {
+            board[r+diag][c-diag] += incre;
         }
     }
     
@@ -110,8 +107,8 @@ public class QueenBoard {
         for (int col = 0; col < board[row].length; col++) {
             if (addQueen(row, col)) {
                 total += countSolutions(row+1, count+1);
-            }
-            removeQueen(row, col);
+            
+            removeQueen(row, col);}
         }
         return total;
     }
