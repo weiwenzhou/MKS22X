@@ -63,7 +63,28 @@ public class QueenBoard {
     }
     
     public boolean solve() {
-        return true;
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col] != 0) {
+                    throw new IllegalStateException();
+                }
+            }
+        }
+        return solve(0);
+    }
+    
+    private boolean solve(int row) {
+        if (row == board.length) {
+            return true;
+        }
+        for (int col = 0; col < board[row].length; col++) {
+            addQueen(row, col);
+            if (solve(row+1)) {
+                return true;
+            }
+            removeQueen(row, col);
+        }
+        return false;
     }
     
     public int countSolutions() {
@@ -74,12 +95,14 @@ public class QueenBoard {
         QueenBoard qb = new QueenBoard(5);
         
         System.out.println(qb);
-        System.out.println(qb.addQueen(1,1));
-        System.out.println(qb.addQueen(2,3));
+        Sytem.out.println(qb.solve());
         System.out.println(qb);
-        System.out.println(qb.removeQueen(2,3));
-        System.out.println(qb.removeQueen(2,0));
-        System.out.println(qb);
+        // System.out.println(qb.addQueen(1,1));
+        // System.out.println(qb.addQueen(2,3));
+        // System.out.println(qb);
+        // System.out.println(qb.removeQueen(2,3));
+        // System.out.println(qb.removeQueen(2,0));
+        // System.out.println(qb);
         //System.out.println(qb);
     }
 }
