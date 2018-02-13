@@ -89,21 +89,41 @@ public class QueenBoard {
     }
     
     public int countSolutions() {
-        return 0;
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col] != 0) {
+                    throw new IllegalStateException();
+                }
+            }
+        }
+        return countSolutions(0, 0);
+    }
+    
+    private int countSolutions(int row, int count) {
+        int total = 0;
+        if (count == board.length) {
+            return 1;
+        }
+        if (row == board.length) {
+            return 0;
+        }
+        for (int col = 0; col < board[row].length; col++) {
+            if (addQueen(row, col)) {
+                total += countSolutions(row+1, count+1);
+            }
+            removeQueen(row, col);
+        }
+        return total;
     }
     
     public static void main(String[] args) {
         QueenBoard qb = new QueenBoard(5);
         
         System.out.println(qb);
-        System.out.println(qb.solve());
+        //System.out.println(qb.solve());
+        System.out.println(qb.countSolutions());
         System.out.println(qb);
-        // System.out.println(qb.addQueen(1,1));
-        // System.out.println(qb.addQueen(2,3));
-        // System.out.println(qb);
-        // System.out.println(qb.removeQueen(2,3));
-        // System.out.println(qb.removeQueen(2,0));
-        // System.out.println(qb);
-        //System.out.println(qb);
+        
+        
     }
 }
