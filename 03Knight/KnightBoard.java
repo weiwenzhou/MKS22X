@@ -18,7 +18,20 @@ public class KnightBoard {
     }
     
     public boolean solve(int startingRow, int startingCol) {
-        return true;
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col] != 0) {
+                    throw new IllegalStateException();
+                }
+            }
+        }
+        return solve(startingRow, startingRow, 0);
+    }
+    
+    private boolean solve(int startingRow, int startingCol, int knights) {
+        if (knights == board.length * board[0].length) {
+            return true;
+        }
     }
     
     public static void main(String[] args) {
