@@ -69,7 +69,11 @@ public class KnightBoard {
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
                 if (board[row][col] < 10) {
-                    returnStr += "_" + board[row][col];
+                    if (board[row][col] == 0) {
+                        returnStr += "__";
+                    } else {
+                        returnStr += "_" + board[row][col];
+                    }
                 } else {
                     returnStr += board[row][col];
                 }
@@ -77,9 +81,12 @@ public class KnightBoard {
             }
             returnStr += "\n";
         }
+        return returnStr;
     }
     
     public static void main(String[] args) {
         KnightBoard kb = new KnightBoard(7, 7);
+        
+        System.out.println(kb);
     }
 }
