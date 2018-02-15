@@ -64,6 +64,20 @@ public class KnightBoard {
         return false;
     }
     
+    public String toString() {
+        String returnStr = "";
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col] < 10) {
+                    returnStr += "_" + board[row][col];
+                } else {
+                    returnStr += board[row][col];
+                }
+                returnStr += " ";
+            }
+            returnStr += "\n";
+        }
+    }
     
     public static void main(String[] args) {
         KnightBoard kb = new KnightBoard(7, 7);
