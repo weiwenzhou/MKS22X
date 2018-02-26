@@ -91,11 +91,43 @@ public class KnightBoard {
         return returnStr;
     }
     
+    public int countSolutions(int startingRow, int startingCol) {
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col] != 0) {
+                    throw new IllegalStateException();
+                }
+            }
+        }
+        return countSolutions(startingRow, startingCol, 1);
+    }
+    
+    private int countSolutions(int startingRow, int startingCol, int knights) {
+        int total = 0;
+        if (knights == board.length * board[0].length) {
+            return 1;
+        }
+        for (int x = 0; x < moveSet[0].length; x++) {
+            int r = startingRow + moveSet[0][x];
+            int c = startingCol + moveSet[1][x];
+            try {
+                if (board[r][c] == 0) {
+                    board[startingRow][startingCol] = knights;
+                    total += countSolutions(r, c, knights+1);
+                    board[startingRow][startingCol] = 0;
+                }
+            } catch (IndexOutOfBoundsException e) {}
+        }
+        return total;
+    }
+    
     public static void main(String[] args) {
         KnightBoard kb = new KnightBoard(5, 5);
         
         System.out.println(kb);
-        System.out.println(kb.solve(0,0));
+        //System.out.println(kb.solve(0,0));
+        System.out.println(kb.countSolutions(0,0);
         System.out.println(kb);
+        
     }
 }
