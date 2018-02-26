@@ -14,8 +14,8 @@ public class KnightBoard {
         }
         moveSet = new int[2][8];
         
-        int[] x = {-2, -2, -1, -1, 1, 1, 2, 2};
-        int[] y = {1, -1, 2, -2, 2, -2, 1, -1};
+        int[] x = {-1, -2, -2, -1, 1, 2, 2, 1};
+        int[] y = {-2, -1, 1, 2, 2, 1, -1, -2};
         
         moveSet[0] = x;
         moveSet[1] = y;
@@ -45,21 +45,28 @@ public class KnightBoard {
     }
     
     private boolean solve(int startingRow, int startingCol, int knights) {
-        if (knights - 1 == board.length * board[0].length) {
+        if (knights == board.length * board[0].length) {
+            if (board[startingRow][startingCol] == 0) {
+                board[startingRow][startingCol] = knights;
+            }
             return true;
         }
-        for (int x = 0; x < moveSet.length; x++) {
+        for (int x = 0; x < moveSet[0].length; x++) {
             int r = startingRow + moveSet[0][x];
             int c = startingCol + moveSet[1][x];
-            if ( r >= 0 && r < board.length && c >= 0 && c < board[0].length) {
+            try {
                 if (board[r][c] == 0) {
-                    board[r][c] = knights;
+                    board[startingRow][startingCol] = knights;
+                    //System.out.println(Text.go(1,1));
+                    //Text.go(1,1);
+                    //System.out.println(this);
+                    //Text.wait(10); //adjust this delay
                     if (solve(r, c, knights+1)) {
                         return true;
                     }
+                    board[startingRow][startingCol] = 0;
                 }
-                board[r][c] = 0;
-            }
+            } catch (IndexOutOfBoundsException e) {}
         }
         return false;
     }
@@ -85,8 +92,10 @@ public class KnightBoard {
     }
     
     public static void main(String[] args) {
-        KnightBoard kb = new KnightBoard(7, 7);
+        KnightBoard kb = new KnightBoard(5, 5);
         
+        System.out.println(kb);
+        System.out.println(kb.solve(0,0));
         System.out.println(kb);
     }
 }
