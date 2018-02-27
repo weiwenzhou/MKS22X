@@ -18,12 +18,31 @@ public class Maze{
       2. The maze has a border of '#' around the edges. So you don't have to check for out of bounds!
 
 
-      3. When the file is not found OR the file is invalid (not exactly 1 E and 1 S) then: print a meaningful error and exit the program.
+      3. When the file is not found OR the file is invalid (not exactly 1 E and 1 S) then: 
+         throw a FileNotFoundException or IllegalStateException
 
     */
 
     public Maze(String filename){
-        //COMPLETE CONSTRUCTOR
+	try {
+	    File text = new File(filename);
+	    Scanner in = new Scanner(text);
+
+	    int col = in.nextLine().length();
+	    int row = 0;
+	    while(in.hasNextLine()){
+		row++;
+		in.nextLine();
+	    }
+	    in.reset();
+	    maze = new char[row][col];
+	    for (int r = 0; r < row; r++) {
+		String line = r.nextLine();
+		
+	    
+	} catch (FileNotFoundException e) {
+		throw new NotFoundException();
+	}
     }
     
 
