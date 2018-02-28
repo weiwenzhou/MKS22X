@@ -41,6 +41,13 @@ public class KnightBoard {
                 }
             }
         }
+        try {
+            if (board[startingRow][startingCol] == 0) {
+                
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
+        }
         return solve(startingRow, startingRow, 1);
     }
     
@@ -99,6 +106,13 @@ public class KnightBoard {
                 }
             }
         }
+        try {
+            if (board[startingRow][startingCol] == 0) {
+                
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
+        }
         return countSolutions(startingRow, startingCol, 1);
     }
     
@@ -126,7 +140,7 @@ public class KnightBoard {
         
         System.out.println(kb);
         //System.out.println(kb.solve(0,0));
-        System.out.println(kb.countSolutions(0,0);
+        System.out.println(kb.countSolutions(-1,0));
         System.out.println(kb);
         
     }
