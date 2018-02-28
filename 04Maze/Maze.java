@@ -23,25 +23,26 @@ public class Maze{
 
     */
 
-    public Maze(String filename){
-	try {
-	    File text = new File(filename);
-	    Scanner in = new Scanner(text);
-
-	    int col = in.nextLine().length();
-	    int row = 0;
-	    while(in.hasNextLine()){
-		row++;
-		in.nextLine();
+    public Maze(String filename) throws FileNotFoundException{
+	File text = new File(filename);
+	Scanner in = new Scanner(text);
+	String input = "";
+	int row = 0;
+	while(in.hasNextLine()){
+	    row++;
+	    input += in.nextLine() + "x";
+	}
+	int col = input.indexOf("x");
+	maze = new char[row][col];
+	int r = 0;
+	int c = 0;
+	for (int x = 0; x < input.length(); x++) {
+	    if (input.charAt(x) == 'x') {
+		c = 0;
+		r++;
+	    } else {
+		maze[r][c] = input.charAt(x);
 	    }
-	    in.reset();
-	    maze = new char[row][col];
-	    for (int r = 0; r < row; r++) {
-		String line = r.nextLine();
-		
-	    
-	} catch (FileNotFoundException e) {
-		throw new NotFoundException();
 	}
     }
     
@@ -89,7 +90,7 @@ public class Maze{
             //and start solving at the location of the s.
 
             //return solve(???,???);
-
+	return -1;
     }
 
     /*
@@ -127,5 +128,20 @@ public class Maze{
         return -1; //so it compiles
     }
 
+    public String toString() {
+	String returnStr = "";
+        for (int r = 0; r < maze.length; r++) {
+            for (int c = 0; c < maze[r].length; c++) {
+                returnStr += maze[r][c];
+            }
+            returnStr += "\n";
+        }
+        return returnStr;
+    }
 
+    public static void main(String[] args) {
+	Maze m = new Maze("data1.dat");
+
+	System.out.println(m);
+    }
 }
