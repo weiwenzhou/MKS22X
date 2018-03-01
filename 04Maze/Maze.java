@@ -24,35 +24,39 @@ public class Maze{
     */
 
     public Maze(String filename) throws FileNotFoundException{
-	File text = new File(filename);
-	Scanner in = new Scanner(text);
-	String input = "";
-	int row = 0;
-	while(in.hasNextLine()){
-	    row++;
-	    input += in.nextLine() + "x";
-	}
-	int col = input.indexOf("x");
-	maze = new char[row][col];
-	int r = 0;
-	int c = 0;
-	for (int x = 0; x < input.length(); x++) {
-	    if (input.charAt(x) == 'x') {
-		c = 0;
-		r++;
-	    } else {
-		maze[r][c] = input.charAt(x);
-	    }
-	}
+        File text = new File(filename);
+        Scanner in = new Scanner(text);
+        String input = "";
+        int row = 0;
+        while(in.hasNextLine()){
+            row++;
+            input += in.nextLine() + "x";
+        }
+        if (input.indexOf("S") == -1 || input.indexOf("E") == -1) {
+            throw new IllegalStateException();
+        }
+        int col = input.indexOf("x");
+        maze = new char[row][col];
+        int r = 0;
+        int c = 0;
+        for (int x = 0; x < input.length(); x++) {
+            if (input.charAt(x) == 'x') {
+                c = 0;
+                r++;
+            } else {
+                maze[r][c] = input.charAt(x);
+                c++;
+            }
+        }
     }
     
 
     private void wait(int millis){
-         try {
-             Thread.sleep(millis);
-         }
-         catch (InterruptedException e) {
-         }
+        try {
+            Thread.sleep(millis);
+        }
+            catch (InterruptedException e) {
+        }
      }
 
 
@@ -90,7 +94,7 @@ public class Maze{
             //and start solving at the location of the s.
 
             //return solve(???,???);
-	return -1;
+        return -1;
     }
 
     /*
@@ -129,19 +133,20 @@ public class Maze{
     }
 
     public String toString() {
-	String returnStr = "";
-        for (int r = 0; r < maze.length; r++) {
-            for (int c = 0; c < maze[r].length; c++) {
-                returnStr += maze[r][c];
+        String returnStr = "";
+            for (int r = 0; r < maze.length; r++) {
+                for (int c = 0; c < maze[r].length; c++) {
+                    returnStr += maze[r][c];
+                }
+                returnStr += "\n";
             }
-            returnStr += "\n";
-        }
         return returnStr;
     }
 
     public static void main(String[] args) {
-	Maze m = new Maze("data1.dat");
-
-	System.out.println(m);
+        try {
+            Maze m = new Maze("data1.dat");
+            System.out.println(m);
+        } catch (FileNotFoundException e) {}
     }
 }
