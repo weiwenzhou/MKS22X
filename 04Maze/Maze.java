@@ -44,16 +44,19 @@ public class Maze{
         if (input.indexOf("S") == -1 || input.indexOf("E") == -1) {
             throw new IllegalStateException();
         }
+        if (input.indexOf("S") != input.lastIndexOf("S") || input.indexOf("E") != input.lastIndexOf("E")) {
+            throw new IllegalStateException();
+        }
         int col = input.indexOf("x");
         maze = new char[row][col];
         int r = 0;
         int c = 0;
-        for (int x = 0; x < input.length(); x++) {
-            if (input.charAt(x) == 'x') {
+        for (int index = 0; index < input.length(); index++) {
+            if (input.charAt(index) == 'x') {
                 c = 0;
                 r++;
             } else {
-                maze[r][c] = input.charAt(x);
+                maze[r][c] = input.charAt(index);
                 c++;
             }
         }
@@ -97,13 +100,13 @@ public class Maze{
         //find the location of the S. 
         int r = -1;
         int c = -1;
-        boolean found = false;
-        for (int row = 0; row < maze.length || found; row++) {
-            for (int col = 0; col < maze[row].length || found; col++) {
+        boolean found = true;
+        for (int row = 0; found && row < maze.length; row++) {
+            for (int col = 0; found && col < maze[row].length; col++) {
                 if (maze[row][col] == 'S') {
                     r = row;
                     c = col;
-                    found = true;
+                    found = false;
                 }
             }
         }
@@ -141,36 +144,34 @@ public class Maze{
 
             clearTerminal();
             System.out.println(this);
+            System.out.println("ROW:"+row+","+"COL:"+col+"count"+count);
 
-            wait(20);
+            wait(400);
         }
 
         //COMPLETE SOLVE
         if (maze[row][col] == 'E') {
             return count;
         }
-        if (maze[row+1][col] == ' ') {
-            maze[row][col] = '@';
-            count = solve(row+1, col, count++);
-            maze[row][col] = ' ';
-        }
-        if (maze[row-1][col] == ' ') {
-            maze[row][col] = '@';
-            count = solve(row-1, col, count++);
-            maze[row][col] = ' ';
-        }
-        if (maze[row][col+1] == ' ') {
-            maze[row][col] = '@';
-            count = solve(row, col+1, count++);
-            maze[row][col] = ' ';
-        }
-        if (maze[row][col-1] == ' ') {
-            maze[row][col] = '@';
-            count = solve(row, col-1, count++);
-            maze[row][col] = ' ';
+        
+        for (int x = 0; x < moveSet[0].length; x++) {
+            try {
+                if (maze[row+moveSet[0][x]][col+moveSet[1][x]] == ' ' || maze[row+moveSet[0][x]][col+moveSet[1][x]] == 'E') {
+                    maze[row][col] = '@';
+                    int temp = solve(row+moveSet[0][x], col+moveSet[1][x], count+1);
+                    if (temp != -1) {
+                        return temp;
+                    }
+                    maze[row][col] = ' ';
+                    System.out.println(this);
+                    System.out.println("ROW:"+row+","+"COL:"+col+"count"+count);
+
+                    wait(400);
+                }
+            } catch (IndexOutOfBoundsException e) {}
         }
         
-        return count; //so it compiles
+        return -1; //so it compiles
     }
 
     public String toString() {
@@ -190,7 +191,7 @@ public class Maze{
             System.out.println(m);
             m.setAnimate(true);
             System.out.println(m.solve());
-            System.out.println(m);
+            //System.out.println(m);
         } catch (FileNotFoundException e) {}
     }
 }
