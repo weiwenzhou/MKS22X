@@ -4,6 +4,7 @@ public class Maze{
 
 
     private char[][]maze;
+    private int[][] moveSet;
     private boolean animate;//false by default
 
     /*Constructor loads a maze text file, and sets animate to false by default.
@@ -24,6 +25,14 @@ public class Maze{
     */
 
     public Maze(String filename) throws FileNotFoundException{
+        moveSet = new int[2][4];
+        
+        int[] x = {-1,0,0,1};
+        int[] y = {0,-1,1,0};
+        
+        moveSet[0] = x;
+        moveSet[1] = y;
+        
         File text = new File(filename);
         Scanner in = new Scanner(text);
         String input = "";
@@ -85,16 +94,26 @@ public class Maze{
     */
     public int solve(){
 
-            //find the location of the S. 
+        //find the location of the S. 
+        int r = -1;
+        int c = -1;
+        boolean found = false;
+        for (int row = 0; row < maze.length || found; row++) {
+            for (int col = 0; col < maze[row].length || found; col++) {
+                if (maze[row][col] == 'S') {
+                    r = row;
+                    c = col;
+                    found = true;
+                }
+            }
+        }
+        //erase the S
+        maze[r][c] = ' ';
 
-
-            //erase the S
-
-
-            //and start solving at the location of the s.
-
-            //return solve(???,???);
-        return -1;
+        //and start solving at the location of the s.
+        
+        //return solve(???,???);
+        return solve(r, c, 0);
     }
 
     /*
@@ -115,9 +134,8 @@ public class Maze{
             Note: This is not required based on the algorithm, it is just nice visually to see.
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){ //you can add more parameters since this is private
-
-
+    private int solve(int row, int col, int count){ //you can add more parameters since this is private
+        
         //automatic animation! You are welcome.
         if(animate){
 
@@ -128,8 +146,31 @@ public class Maze{
         }
 
         //COMPLETE SOLVE
-
-        return -1; //so it compiles
+        if (maze[row][col] == 'E') {
+            return count;
+        }
+        if (maze[row+1][col] == ' ') {
+            maze[row][col] = '@';
+            count = solve(row+1, col, count++);
+            maze[row][col] = ' ';
+        }
+        if (maze[row-1][col] == ' ') {
+            maze[row][col] = '@';
+            count = solve(row-1, col, count++);
+            maze[row][col] = ' ';
+        }
+        if (maze[row][col+1] == ' ') {
+            maze[row][col] = '@';
+            count = solve(row, col+1, count++);
+            maze[row][col] = ' ';
+        }
+        if (maze[row][col-1] == ' ') {
+            maze[row][col] = '@';
+            count = solve(row, col-1, count++);
+            maze[row][col] = ' ';
+        }
+        
+        return count; //so it compiles
     }
 
     public String toString() {
@@ -146,6 +187,9 @@ public class Maze{
     public static void main(String[] args) {
         try {
             Maze m = new Maze("data1.dat");
+            System.out.println(m);
+            m.setAnimate(true);
+            System.out.println(m.solve());
             System.out.println(m);
         } catch (FileNotFoundException e) {}
     }
