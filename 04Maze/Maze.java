@@ -163,10 +163,6 @@ public class Maze{
                         return temp;
                     }
                     maze[row][col] = ' ';
-                    System.out.println(this);
-                    System.out.println("ROW:"+row+","+"COL:"+col+"count"+count);
-
-                    wait(400);
                 }
             } catch (IndexOutOfBoundsException e) {}
         }
