@@ -53,7 +53,7 @@ public class USACO {
         return depth * 72 * 72;
     }
     
-    public static int silver(String filename) {
+    public static int silver(String filename) throws FileNotFoundException {
         File text = new File(filename);
         Scanner in = new Scanner(text);
 
@@ -61,23 +61,21 @@ public class USACO {
         int row = Integer.parseInt(dimensions[0]);
         int col = Integer.parseInt(dimensions[1]);
         int time = Integer.parseInt(dimensions[2]);
-        char[][] board = new int[row][col];
+        char[][] board = new char[row][col];
 
         for (int r = 0; r < row; r++) {
-                String[] current = in.nextLine().split(" ");
+                String current = in.nextLine();
                 for (int c = 0; c < col; c++) {
-                    board[r][c] = current[c].charAt(0);
+                    board[r][c] = current.charAt(c);
             }
         }
         String[] coords = in.nextLine().split(" ");
         
-        return silver(board, Integer.parseInt(coords[0]), 
-        Integer.parseInt(coords[1]), Integer.parseInt(coords[2]), 
-        Integer.parseInt(coords[3]), Integer.parseInt(coords[4]), time, 0);
+        return silver(board, Integer.parseInt(coords[0])-1, Integer.parseInt(coords[1])-1, Integer.parseInt(coords[2])-1, Integer.parseInt(coords[3])-1, time);
     }
     
-    public static int silver(char[][] board, int rCurrent, int cCurrent, int r2, int c2, int T) {
-        int[][] moveSet { {0,1}, {0,-1}, {1,0}, {-1,0} };
+    private static int silver(char[][] board, int rCurrent, int cCurrent, int r2, int c2, int T) {
+        int[][] moveSet = { {0,1}, {0,-1}, {1,0}, {-1,0} };
         if (T == 0) {
             if (rCurrent == r2 && cCurrent == c2) {
                 return 1;
@@ -86,7 +84,7 @@ public class USACO {
             }
         }
         int total = 0;
-        for (int x = 0; x < moveSet.length; x++) {
+        for (int x = 0; x < 4; x++) {
             try {
                 if (board[rCurrent+moveSet[x][0]][cCurrent+moveSet[x][1]] != '*') {
                     total += silver(board, rCurrent+moveSet[x][0], cCurrent+moveSet[x][1], r2, c2, T);
@@ -98,9 +96,11 @@ public class USACO {
     public static void main(String[] args) {
         try {
             if (args.length == 1) {
-                System.out.println(bronze(args[0]));
+                //System.out.println(bronze(args[0]));
+                System.out.println(silver(args[0]));
             } else {
-                System.out.println(bronze("makelake.1.in"));
+                //System.out.println(bronze("makelake.1.in"));
+                System.out.println(silver("ctravel.1.in"));
             }
         } catch (FileNotFoundException e) {
             System.out.println("not found");
