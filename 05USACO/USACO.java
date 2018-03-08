@@ -62,37 +62,49 @@ public class USACO {
         int col = Integer.parseInt(dimensions[1]);
         int time = Integer.parseInt(dimensions[2]);
         char[][] board = new char[row][col];
+	int[][] odd = new int[row][col];
+	int[][] even = new int[row][col];
 
         for (int r = 0; r < row; r++) {
                 String current = in.nextLine();
                 for (int c = 0; c < col; c++) {
                     board[r][c] = current.charAt(c);
+		    odd[r][c] = 0;
+		    even[r][c] = 0;
             }
         }
         String[] coords = in.nextLine().split(" ");
-        
-        return silver(board, Integer.parseInt(coords[0])-1, Integer.parseInt(coords[1])-1, Integer.parseInt(coords[2])-1, Integer.parseInt(coords[3])-1, time);
-    }
-    
-    private static int silver(char[][] board, int rCurrent, int cCurrent, int r2, int c2, int T) {
-        int[][] moveSet = { {0,1}, {0,-1}, {1,0}, {-1,0} };
-        if (T == 0) {
-            if (rCurrent == r2 && cCurrent == c2) {
-                return 1;
-            } else {
-                return 0;
+
+	boolean swap = true; // true == even, false == odd
+	
+	for (int step = 0; step < time; step++) {
+	    int sum = 0;
+	    int[][] moveSet = { {0,1}, {0,-1}, {1,0}, {-1,0} };
+
+	    if (swap) {
+		int[][] viewing = odd;
+		int[][] changing = even;
+	    } else {
+
+	    }
+	    
+	    for (int r = 0; r < row; r++) {
+                for (int c = 0; c < col; c++) {
+		    int sum = 0;
+
+		    for (int x = 0; x < 4; x++) {
+			try {
+			    sum += viewing[r+moveSet[x][0]][c+moveSet[x][1]];
+			} catch (IndexOutOfBoundsException e) {}
+		    }
+
+		    changing[r][c] = sum;
+		}
             }
         }
-        int total = 0;
-        for (int x = 0; x < 4; x++) {
-            try {
-                if (board[rCurrent+moveSet[x][0]][cCurrent+moveSet[x][1]] != '*') {
-                    total += silver(board, rCurrent+moveSet[x][0], cCurrent+moveSet[x][1], r2, c2, T);
-                }
-            } catch (IndexOutOfBoundsException e) {}
-        }
-        return total;
     }
+
+    
     public static void main(String[] args) {
         try {
             if (args.length == 1) {
