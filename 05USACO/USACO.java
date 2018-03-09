@@ -119,7 +119,12 @@ public class USACO {
             }   
             swap = !swap;
         }
-        return even[r2][c2] + odd[r2][c2];
+        if (swap) {
+            return odd[r2][c2];
+        } else {
+            return even[r2][c2];
+        }
+        //return even[r2][c2] + odd[r2][c2];
     }
     
     public static void main(String[] args) {
