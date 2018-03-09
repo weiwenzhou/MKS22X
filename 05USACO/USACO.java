@@ -86,7 +86,7 @@ public class USACO {
             even[r1][c1] = 1;
         }
         
-        boolean swap = true; // true == even, false == odd
+        boolean swap = false; // true == even, false == odd
 	
         for (int step = 0; step < time; step++) {
             int[][] moveSet = { {0,1}, {0,-1}, {1,0}, {-1,0} };            
