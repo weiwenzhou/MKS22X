@@ -74,8 +74,8 @@ public class Quick {
         //System.out.println(partition(set, 1, 6));
         
         int[] ary = { 2, 10, 15, 23, 0,  5};
-        // System.out.println(quickselect(ary, 1));
-        // System.out.println(Arrays.toString(ary));
+        System.out.println(quickselect(ary, 1));
+        System.out.println(Arrays.toString(ary));
         
         System.out.println(Arrays.toString(ary));
         quicksort(ary);
