@@ -1,6 +1,27 @@
 import java.util.Arrays;
 public class Quick {
-    public static int[] partition(int[] data, int start, int end) {
+    
+    public static int partition(int[] data, int start, int end) {
+        int p = (int) (Math.random()*(end-start) + start);
+        int pivot = data[p];
+        int low = start+1;
+        int high = end;
+        swap(data, p, start);
+        while (low <= high) {
+            if (data[low] > pivot) {
+                swap(data, low, high);
+                high--;
+            } else {
+                low++;
+            }
+        }
+        // System.out.println("p"+Arrays.toString(data));
+        swap(data, start, high);
+        // System.out.println("pIndex"+p+",value"+pivot);
+        return high;
+     }
+    
+    public static int[] partitionDutch(int[] data, int start, int end) {
         int p = (int) (Math.random()*(end-start) + start);
         int pivot = data[p];
         int low = start;
@@ -37,7 +58,7 @@ public class Quick {
     
     public static int quickselect(int[] data, int k, int start, int end) {
         // System.out.println(""+start+","+end+Arrays.toString(data));
-        int[] indexes = partition(data, start, end);
+        int[] indexes = partitionDutch(data, start, end);
         // System.out.println("part"+Arrays.toString(data));
         // System.out.println("k"+k+",index"+index);
         if (indexes[1] == k) {
@@ -56,7 +77,7 @@ public class Quick {
     public static void quicksort(int[] data, int start, int end) {
         // System.out.println("qstart"+start+"end"+end);
         if (start <= end) {
-            int[] indexes = partition(data, start, end);
+            int[] indexes = partitionDutch(data, start, end);
             // System.out.println("qIndex"+indexes[0]+","+indexes[1]+Arrays.toString(data));
             quicksort(data, start, indexes[0]-1);
             quicksort(data, indexes[1]+1, end);
@@ -71,7 +92,7 @@ public class Quick {
         // System.out.println("@1a"+Arrays.toString(set));
         // System.out.println(partition(set, 0, 8));
         // System.out.println("@2"+Arrays.toString(set));
-        //System.out.println(partition(set, 1, 6));
+        //System.out.println(partitionDutch(set, 1, 6));
         
         int[] ary = { 2, 10, 15, 23, 0,  5};
         System.out.println(quickselect(ary, 1));
