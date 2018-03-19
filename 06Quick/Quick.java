@@ -1,16 +1,23 @@
 import java.util.Arrays;
 public class Quick {
     public static int partition(int[] data, int start, int end) {
-        int num = end - start + 1;
-        int pivot = (int) (Math.random()*num + start);
-        int index = start;
-        for (int x = start; x <= end; x++) {
-            if (data[pivot] > data[x]) {
-                index++;
+        int p = (int) (Math.random()*(end-start) + start);
+        int pivot = data[p];
+        int low = start+1;
+        int high = end;
+        swap(data, p, start);
+        while (low <= high) {
+            if (data[low] > pivot) {
+                swap(data, low, high);
+                high--;
+            } else {
+                low++;
             }
         }
-        data[0] = 100000;
-        return index;
+        //System.out.println(Arrays.toString(data));
+        swap(data, 0, high);
+        //System.out.println("Index"+p+",value"+pivot);
+        return high;
     }
     
     public static void swap(int[] data, int start, int end) {
@@ -35,10 +42,13 @@ public class Quick {
     }
     
     public static void main(String[] args) {
-        int[] set = {17, 61, 67, 47, 93, 12, 20, 4, 44, 68};
+        //int[] set = {17, 61, 67, 47, 93, 12, 20, 4, 44, 68};
+        int[] set = {0,0,0,1,99,3,99,2,99};
         System.out.println("@1"+Arrays.toString(set));
-        System.out.println(partition(set, 0, 4));
+        swap(set, 0, 8);
+        System.out.println("@1a"+Arrays.toString(set));
+        System.out.println(partition(set, 0, 8));
         System.out.println("@2"+Arrays.toString(set));
-        System.out.println(partition(set, 1, 6));
+        //System.out.println(partition(set, 1, 6));
     }
 }
