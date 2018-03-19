@@ -14,9 +14,9 @@ public class Quick {
                 low++;
             }
         }
-        //System.out.println(Arrays.toString(data));
-        swap(data, 0, high);
-        //System.out.println("Index"+p+",value"+pivot);
+        // System.out.println("p"+Arrays.toString(data));
+        swap(data, start, high);
+        // System.out.println("pIndex"+p+",value"+pivot);
         return high;
     }
     
@@ -44,6 +44,20 @@ public class Quick {
         }
     }
     
+    public static void quicksort(int[] data) {
+        quicksort(data, 0, data.length-1);
+    }
+    
+    public static void quicksort(int[] data, int start, int end) {
+        // System.out.println("qstart"+start+"end"+end);
+        if (start <= end) {
+            int index = partition(data, start, end);
+            // System.out.println("qIndex"+index+Arrays.toString(data));
+            quicksort(data, start, index-1);
+            quicksort(data, index+1, end);
+        }
+    }
+    
     public static void main(String[] args) {
         //int[] set = {17, 61, 67, 47, 93, 12, 20, 4, 44, 68};
         int[] set = {0,0,0,1,99,3,99,2,99};
@@ -55,7 +69,11 @@ public class Quick {
         //System.out.println(partition(set, 1, 6));
         
         int[] ary = { 2, 10, 15, 23, 0,  5};
-        System.out.println(quickselect(ary, 1));
+        // System.out.println(quickselect(ary, 1));
+        // System.out.println(Arrays.toString(ary));
+        
+        System.out.println(Arrays.toString(ary));
+        quicksort(ary);
         System.out.println(Arrays.toString(ary));
         
     }
