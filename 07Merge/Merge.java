@@ -1,6 +1,6 @@
 import java.util.Arrays;
 public class Merge {
-
+    /*
     public static void mergesort(int[] data) {
 	int[] temp = new int[data.length];
 	mergesort(data, temp, 0, data.length-1);
@@ -12,9 +12,9 @@ public class Merge {
 	    mergesort(temp, data, (start+end)/2+1, end);
 	}
     }
-    
+    */
     // old merge sort.
-    /*
+    
     public static void mergesort(int[] data) {
         int[] replacement = mergesort(data, 0, data.length-1);
 	System.out.println(Arrays.toString(replacement));
@@ -62,7 +62,7 @@ public class Merge {
         return newAry;
     }
 
-    */
+    
     
     public static void main(String[] args) {
         int[] ary = { 2, 10, 15, 23, 0,  5};
