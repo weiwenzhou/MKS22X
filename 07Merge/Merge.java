@@ -16,8 +16,9 @@ public class Merge {
     // old merge sort.
     
     public static void mergesort(int[] data) {
+	if (data.length == 0)return;
         int[] replacement = mergesort(data, 0, data.length-1);
-	System.out.println(Arrays.toString(replacement));
+	//System.out.println(Arrays.toString(replacement));
         for (int x = 0; x < data.length; x++) {
             data[x] = replacement[x];
         }
