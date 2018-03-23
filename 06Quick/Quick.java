@@ -72,16 +72,41 @@ public class Quick {
     
     public static void quicksort(int[] data) {
         quicksort(data, 0, data.length-1);
+	//System.out.println(Arrays.toString(data));
     }
     
     public static void quicksort(int[] data, int start, int end) {
+	if (end - start <=2) {
+	    System.out.println("Insertion next"+start+","+end+Arrays.toString(data));
+	    insertionsort(data, start, end);
+	} else {
         // System.out.println("qstart"+start+"end"+end);
-        if (start <= end) {
-            int[] indexes = partitionDutch(data, start, end);
-            // System.out.println("qIndex"+indexes[0]+","+indexes[1]+Arrays.toString(data));
-            quicksort(data, start, indexes[0]-1);
-            quicksort(data, indexes[1]+1, end);
-        }
+	    if (start <= end) {
+		int[] indexes = partitionDutch(data, start, end);
+		// System.out.println("qIndex"+indexes[0]+","+indexes[1]+Arrays.toString(data));
+		quicksort(data, start, indexes[0]-1);
+		quicksort(data, indexes[1]+1, end);
+	    }
+	}
+    }
+
+    public static void insertionsort(int[] data, int start, int end) {
+	for (int x = start+1; x < end+1; x++) {
+	    int current = x-1;
+	    System.out.println(x);
+	    while (current >= start) {
+		if (data[x] < data[current]) {
+		    System.out.println("preswap"+Arrays.toString(data));
+		    swap(data, x, current);
+		    System.out.println("swap"+Arrays.toString(data));
+		    current--;
+		} else {
+		    current--;
+		    //current = -1;
+		}
+	    }
+	}
+	
     }
     
     public static void main(String[] args) {
@@ -95,11 +120,12 @@ public class Quick {
         //System.out.println(partitionDutch(set, 1, 6));
         
         int[] ary = { 2, 10, 15, 23, 0,  5};
-        System.out.println(quickselect(ary, 1));
-        System.out.println(Arrays.toString(ary));
+        //System.out.println(quickselect(ary, 1));
+        //System.out.println(Arrays.toString(ary));
         
         System.out.println(Arrays.toString(ary));
-        quicksort(ary);
+	insertionsort(ary,0,ary.length-1);
+	//quicksort(ary);
         System.out.println(Arrays.toString(ary));
         
     }
