@@ -77,7 +77,7 @@ public class Quick {
     
     public static void quicksort(int[] data, int start, int end) {
 	if (end - start <=2) {
-	    System.out.println("Insertion next"+start+","+end+Arrays.toString(data));
+	    // System.out.println("Insertion next"+start+","+end+Arrays.toString(data));
 	    insertionsort(data, start, end);
 	} else {
         // System.out.println("qstart"+start+"end"+end);
@@ -91,22 +91,17 @@ public class Quick {
     }
 
     public static void insertionsort(int[] data, int start, int end) {
-	for (int x = start+1; x < end+1; x++) {
-	    int current = x-1;
-	    System.out.println(x);
-	    while (current >= start) {
-		if (data[x] < data[current]) {
-		    System.out.println("preswap"+Arrays.toString(data));
-		    swap(data, x, current);
-		    System.out.println("swap"+Arrays.toString(data));
-		    current--;
-		} else {
-		    current--;
-		    //current = -1;
-		}
-	    }
-	}
-	
+        for (int x = start; x < end+1; x++) {
+            int temp = data[x];
+            int correctIndex = start;
+            while ( correctIndex < x && temp > data[correctIndex]) {
+                correctIndex++;
+            }
+            for (int i = x; i > correctIndex; i--) {
+                data[i] = data[i-1];
+            }
+            data[correctIndex] = temp;
+        }
     }
     
     public static void main(String[] args) {
@@ -124,8 +119,8 @@ public class Quick {
         //System.out.println(Arrays.toString(ary));
         
         System.out.println(Arrays.toString(ary));
-	insertionsort(ary,0,ary.length-1);
-	//quicksort(ary);
+        insertionsort(ary,0,ary.length-1);
+        //quicksort(ary);
         System.out.println(Arrays.toString(ary));
         
     }
