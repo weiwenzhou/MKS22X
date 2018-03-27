@@ -15,19 +15,14 @@ public class Merge {
     }
     
     public static void mergesort(int[] data, int[] temp, int start, int end) {
-        if (end - start <= 5) {
-            // System.out.println("Insertion next"+start+","+end+Arrays.toString(data));
-            insertionsort(data, start, end);
-        } else {
-            if (start < end) {
-                // System.out.println("t"+Arrays.toString(temp));
-                // System.out.println("d"+Arrays.toString(temp));
-                int divider = (start+end)/2;
-                // System.out.println(divider);
-                mergesort(temp, data, start, divider);
-                mergesort(temp, data, divider+1, end);
-                merge(data, temp, start, divider, divider+1, end);
-            }
+        if (start < end) {
+            // System.out.println("t"+Arrays.toString(temp));
+            // System.out.println("d"+Arrays.toString(temp));
+            int divider = (start+end)/2;
+            // System.out.println(divider);
+            mergesort(temp, data, start, divider);
+            mergesort(temp, data, divider+1, end);
+            merge(data, temp, start, divider, divider+1, end);
         }
     }
 
@@ -59,20 +54,6 @@ public class Merge {
                 }
             }
             index++;
-        }
-    }
-    
-    public static void insertionsort(int[] data, int start, int end) {
-        for (int x = start; x < end+1; x++) {
-            int temp = data[x];
-            int correctIndex = start;
-            while ( correctIndex < x && temp > data[correctIndex]) {
-                correctIndex++;
-            }
-            for (int i = x; i > correctIndex; i--) {
-                data[i] = data[i-1];
-            }
-            data[correctIndex] = temp;
         }
     }
     
