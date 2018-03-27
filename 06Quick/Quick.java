@@ -76,18 +76,18 @@ public class Quick {
     }
     
     public static void quicksort(int[] data, int start, int end) {
-	if (end - start <=2) {
-	    // System.out.println("Insertion next"+start+","+end+Arrays.toString(data));
-	    insertionsort(data, start, end);
-	} else {
-        // System.out.println("qstart"+start+"end"+end);
-	    if (start <= end) {
-		int[] indexes = partitionDutch(data, start, end);
-		// System.out.println("qIndex"+indexes[0]+","+indexes[1]+Arrays.toString(data));
-		quicksort(data, start, indexes[0]-1);
-		quicksort(data, indexes[1]+1, end);
-	    }
-	}
+        if (end - start <= 5) {
+            // System.out.println("Insertion next"+start+","+end+Arrays.toString(data));
+            insertionsort(data, start, end);
+        } else {
+            // System.out.println("qstart"+start+"end"+end);
+            if (start <= end) {
+                int[] indexes = partitionDutch(data, start, end);
+                // System.out.println("qIndex"+indexes[0]+","+indexes[1]+Arrays.toString(data));
+                quicksort(data, start, indexes[0]-1);
+                quicksort(data, indexes[1]+1, end);
+            }
+        }
     }
 
     public static void insertionsort(int[] data, int start, int end) {
