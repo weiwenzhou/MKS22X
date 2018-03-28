@@ -31,35 +31,37 @@ public class MyLinkedList {
 	int data;
 
 	public Node(int value) {
-	    
+	    next = null;
+	    prev = null;
+	    data = value;
 	}
 
 	public Node getNext() {
-
+	    return next;
 	}
 
 	public Node getPrev() {
-
+	    return prev;
 	}
 
 	public int getValue() {
-
+	    return data;
 	}
 
 	public String toString() {
-
+	    return ""+data;
 	}
 
 	public void setNext(Node nextNode) {
-
+	    next = nextNode;
 	}
 
 	public void setPrev(Node prevNode) {
-
+	    prev = prevNode;
 	}
 
 	public void setValue(int newValue) {
-
+	    data = newValue;
 	}
     }
 }
