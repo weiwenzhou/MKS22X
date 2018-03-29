@@ -16,6 +16,7 @@ public class MyLinkedList {
 	    last.setNext(new Node(value));
 	}
 	length += 1;
+    return true;
     }
 
     public int size() {
@@ -27,7 +28,7 @@ public class MyLinkedList {
 	Node current = first;
 	for (int x = 0; x < length; x++) {
 	    returnStr += current.getValue();
-	    current = current.nextNode();
+	    current = current.getNext();
 	}
 	return returnStr + "]";
     }
@@ -44,53 +45,64 @@ public class MyLinkedList {
     }
 
     private Node getNode(int index) {
-	if (index >= length) {
-	    throw new IndexOutofBoundsException();
+	if (index >= length || index < 0) {
+	    throw new IndexOutOfBoundsException();
 	}
 	Node current = first;
 	for (int x = 0; x < length; x++) {
-	    returnStr += current.getValue();
-	    current = current.nextNode();
+	    current = current.getNext();
 	}
 	return current;
     }
     
     private class Node {
-	private Node next, prev;
-	int data;
+        private Node next, prev;
+        int data;
 
-	public Node(int value) {
-	    next = null;
-	    prev = null;
-	    data = value;
-	}
+        public Node(int value) {
+            next = null;
+            prev = null;
+            data = value;
+        }
 
-	public Node getNext() {
-	    return next;
-	}
+        public Node getNext() {
+            return next;
+        }
 
-	public Node getPrev() {
-	    return prev;
-	}
+        public Node getPrev() {
+            return prev;
+        }
 
-	public int getValue() {
-	    return data;
-	}
+        public int getValue() {
+            return data;
+        }
 
-	public String toString() {
-	    return ""+data;
-	}
+        public String toString() {
+            return ""+data;
+        }
 
-	public void setNext(Node nextNode) {
-	    next = nextNode;
-	}
+        public void setNext(Node nextNode) {
+            next = nextNode;
+        }
 
-	public void setPrev(Node prevNode) {
-	    prev = prevNode;
-	}
+        public void setPrev(Node prevNode) {
+            prev = prevNode;
+        }
 
-	public void setValue(int newValue) {
-	    data = newValue;
-	}
+        public void setValue(int newValue) {
+            data = newValue;
+        }
+    }
+    
+    public void print(String line) {
+        boolean animate = true;
+        if (animate) {
+            System.out.print(line);
+        }
+    }
+    
+    public static void main(String[] args) {
+        MyLinkedList a = new MyLinkedList();
+        System.out.println(a);
     }
 }
