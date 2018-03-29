@@ -3,63 +3,69 @@ public class MyLinkedList {
     private int length;
 
     public MyLinkedList() {
-	first = null;
-	last = null;
-	length = 0;
+        first = null;
+        last = null;
+        length = 0;
     }
 
     public boolean add(int value) {
-	if (length == 0) {
-	    first = new Node(value);
-	    last = first;
-	} else {
-	    last.setNext(new Node(value));
-	}
-	length += 1;
-    return true;
+        if (length == 0) {
+            first = new Node(value);
+            last = first;
+        } else {
+            last.setNext(new Node(value));
+        }
+        length += 1;
+        return true;
     }
 
     public int size() {
-	return length;
+        return length;
     }
 
     public String toString() {
-	String returnStr = "[";
-	Node current = first;
-	for (int x = 0; x < length; x++) {
-	    returnStr += current.getValue();
-	    current = current.getNext();
-	}
-	return returnStr + "]";
+        String returnStr = "[";
+        Node current = first;
+        for (int x = 0; x < length; x++) {
+            returnStr += current.getValue();
+            current = current.getNext();
+        }
+        return returnStr + "]";
     }
 
-    public int get(int index) {
-	return getNode(index).getValue();
+    public void clear() {
+        first = null;
+        last = first;
+        length = 0;
+    }
+    
+    public Integer get(int index) {
+        return getNode(index).getValue();
     }
 
-    public int set(int index, int newValue) {
-	Node view = getNode(index);
-	int value = view.getValue();
-	view.setValue(newValue);
-	return value;
+    public Integer set(int index, Integer newValue) {
+        Node view = getNode(index);
+        int value = view.getValue();
+        view.setValue(newValue);
+        return value;
     }
 
     private Node getNode(int index) {
-	if (index >= length || index < 0) {
-	    throw new IndexOutOfBoundsException();
-	}
-	Node current = first;
-	for (int x = 0; x < length; x++) {
-	    current = current.getNext();
-	}
-	return current;
+        if (index >= length || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node current = first;
+        for (int x = 0; x < length; x++) {
+            current = current.getNext();
+        }
+        return current;
     }
     
     private class Node {
         private Node next, prev;
-        int data;
+        Integer data;
 
-        public Node(int value) {
+        public Node(Integer value) {
             next = null;
             prev = null;
             data = value;
@@ -73,7 +79,7 @@ public class MyLinkedList {
             return prev;
         }
 
-        public int getValue() {
+        public Integer getValue() {
             return data;
         }
 
@@ -89,7 +95,7 @@ public class MyLinkedList {
             prev = prevNode;
         }
 
-        public void setValue(int newValue) {
+        public void setValue(Integer newValue) {
             data = newValue;
         }
     }
