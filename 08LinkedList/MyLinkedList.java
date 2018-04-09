@@ -8,12 +8,15 @@ public class MyLinkedList {
         length = 0;
     }
 
-    public boolean add(int value) {
+    public boolean add(Integer value) {
+        Node addNode = new Node(value);
         if (length == 0) {
-            first = new Node(value);
+            first = addNode;
             last = first;
         } else {
-            last.setNext(new Node(value));
+            last.setNext(addNode);
+            addNode.setPrev(last);
+            last = addNode;
         }
         length += 1;
         return true;
@@ -29,6 +32,9 @@ public class MyLinkedList {
         for (int x = 0; x < length; x++) {
             returnStr += current.getValue();
             current = current.getNext();
+            if (x != length - 1) {
+                returnStr += ", ";
+            }
         }
         return returnStr + "]";
     }
@@ -50,12 +56,25 @@ public class MyLinkedList {
         return value;
     }
 
+    public int indexOf(Integer value) {
+        int index = 0;
+        Node current = first;
+        while (current != null) {
+            if (current.getValue() == value) {
+                return index; 
+            }
+            current = current.getNext();
+            index++;
+        }
+        return -1;
+    }
+    
     private Node getNode(int index) {
         if (index >= length || index < 0) {
             throw new IndexOutOfBoundsException();
         }
         Node current = first;
-        for (int x = 0; x < length; x++) {
+        for (int x = 0; x < index; x++) {
             current = current.getNext();
         }
         return current;
@@ -105,10 +124,55 @@ public class MyLinkedList {
         if (animate) {
             System.out.print(line);
         }
+        System.out.println();
     }
     
     public static void main(String[] args) {
         MyLinkedList a = new MyLinkedList();
+        
+        // Booleans
+        Boolean addSize = false;
+        Boolean get = false;
+        Boolean clear = true;
+        Boolean index = true;
+        Boolean set = true;
+        Boolean add = true;
+        
+        Integer[] nums = {0,1,2,3,4};
+        if (addSize) {
+            System.out.println(a);
+            for (Integer num : nums) {
+                a.add(num);
+                System.out.println(a);
+                System.out.println(a.size());
+            }
+            System.out.println(a);
+        }
+        
+        if (get) {
+            for (int num : nums) {
+                System.out.println(a.get(num));
+            }
+            System.out.println(a);
+        }
         System.out.println(a);
+        
+        if (clear) {
+            System.out.println(a);
+            
+            System.out.println(a);
+            a.clear();
+            System.out.println(a);
+        }
+        
+        if (index) {
+            Integer[] num1 = {7, 1, 6, 8, 0};
+            for (Integer num : num1) {
+                a.add(num);
+            }
+            for (int num : num1) {
+                System.out.println(a.indexOf(num));
+            }
+        }
     }
 }
