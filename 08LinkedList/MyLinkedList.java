@@ -69,6 +69,22 @@ public class MyLinkedList {
         return -1;
     }
     
+    public void add(int index, Integer value) {
+        Node addNode = new Node(value);
+        if (index != 0) {
+            Node view = getNode(index);
+            addNode.setPrev(view.getPrev());
+            addNode.setNext(view);
+            view.setPrev(addNode);
+            addNode.getPrev().setNext(addNode);
+        } else {
+            addNode.setNext(first);
+            first.setPrev(addNode);
+            first = addNode;
+        }
+        length++;
+    }
+    
     private Node getNode(int index) {
         if (index >= length || index < 0) {
             throw new IndexOutOfBoundsException();
@@ -215,6 +231,22 @@ public class MyLinkedList {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Incorrect Index : 10");
             }
+        }
+        
+        if (add) {
+            Integer[] num3 = {0, 1, 2, 3, 4};
+            for (Integer num : num3) {
+                a.add(num);
+            }
+            
+            a.add(0, new Integer(10));
+            System.out.println(a);
+            
+            a.add(2, new Integer(10));
+            System.out.println(a);
+            
+            a.add(6, new Integer(10));
+            System.out.println(a);
         }
     }
 }
