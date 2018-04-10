@@ -133,9 +133,9 @@ public class MyLinkedList {
         // Booleans
         Boolean addSize = false;
         Boolean get = false;
-        Boolean clear = true;
-        Boolean index = true;
-        Boolean set = true;
+        Boolean clear = false;
+        Boolean index = false;
+        Boolean set = false;
         Boolean add = true;
         
         Integer[] nums = {0,1,2,3,4};
@@ -150,28 +150,70 @@ public class MyLinkedList {
         }
         
         if (get) {
+            for (Integer num : nums) {
+                a.add(num);
+            }
+            System.out.println(a);
+            
             for (int num : nums) {
                 System.out.println(a.get(num));
             }
             System.out.println(a);
+            
+            try {
+                a.get(-1);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Incorrect Index : -1");
+            }
+            
+            try {
+                a.get(10);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Incorrect Index : 10");
+            }
         }
-        System.out.println(a);
         
         if (clear) {
             System.out.println(a);
-            
+            a.add(1);
+            a.add(8);
+            a.add(3);
+            a.add(5);
             System.out.println(a);
             a.clear();
             System.out.println(a);
         }
         
         if (index) {
-            Integer[] num1 = {7, 1, 6, 8, 0};
+            Integer[] num1 = {7, 1, 6, 8, 0, 6, 7};
             for (Integer num : num1) {
                 a.add(num);
             }
             for (int num : num1) {
                 System.out.println(a.indexOf(num));
+            }
+        }
+        
+        if (set) {
+            Integer[] num2 = {0, 1, 2, 3, 4, 5};
+            for (Integer num : num2) {
+                a.add(num);
+            }
+            System.out.println(a);
+            
+            System.out.println(a.set(2, 10));
+            System.out.println(a);
+            System.out.println(a.set(4, 10));
+            System.out.println(a);
+            try {
+                a.set(-1, 10);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Incorrect Index : -1");
+            }
+            try {
+                a.set(10, 10);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Incorrect Index : 10");
             }
         }
     }
