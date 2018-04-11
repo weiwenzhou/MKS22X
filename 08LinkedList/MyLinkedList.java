@@ -72,15 +72,25 @@ public class MyLinkedList {
     public void add(int index, Integer value) {
         Node addNode = new Node(value);
         if (index != 0) {
-            Node view = getNode(index);
-            addNode.setPrev(view.getPrev());
-            addNode.setNext(view);
-            view.setPrev(addNode);
-            addNode.getPrev().setNext(addNode);
+            if (index == length) {
+                add(value);
+                length--;
+            } else {
+                Node view = getNode(index);
+                addNode.setPrev(view.getPrev());
+                addNode.setNext(view);
+                view.setPrev(addNode);
+                addNode.getPrev().setNext(addNode);
+            }
         } else {
-            addNode.setNext(first);
-            first.setPrev(addNode);
-            first = addNode;
+            if (length == 0) {
+                first = addNode;
+                last = first;
+            } else {
+                addNode.setNext(first);
+                first.setPrev(addNode);
+                first = addNode;
+            }
         }
         length++;
     }
@@ -191,7 +201,7 @@ public class MyLinkedList {
         Boolean index = false;
         Boolean set = false;
         Boolean add = false;
-        Boolean remove = true;
+        Boolean remove = false;
         
         Integer[] nums = {0,1,2,3,4};
         if (addSize) {
