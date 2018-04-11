@@ -60,7 +60,7 @@ public class MyLinkedList {
         int index = 0;
         Node current = first;
         while (current != null) {
-            if (current.getValue() == value) {
+            if (current.getValue().equals(value)) {
                 return index; 
             }
             current = current.getNext();
@@ -83,6 +83,44 @@ public class MyLinkedList {
             first = addNode;
         }
         length++;
+    }
+    
+    public boolean remove(Integer value) {
+        Node current = first;
+        while (current != null) {
+            if (current.getValue().equals(value)) {
+                if (current == first) {
+                    current.getNext().setPrev(null);
+                    first = current.getNext();
+                } else if (current == last) {
+                    current.getPrev().setNext(null);
+                    last = current.getPrev();
+                } else {
+                    current.getPrev().setNext(current.getNext());
+                    current.getNext().setPrev(current.getPrev());
+                }
+                length--;
+                return true;
+            }
+            current = current.getNext();
+        }
+        return false;
+    }
+    
+    public Integer remove(int index) {
+        Node current = getNode(index);
+        if (index == 0) {
+            current.getNext().setPrev(null);
+            first = current.getNext();
+        } else if (current == last) {
+                current.getPrev().setNext(null);
+                last = current.getPrev();
+        } else {
+            current.getPrev().setNext(current.getNext());
+            current.getNext().setPrev(current.getPrev());
+        }
+        length--;
+        return current.getValue();
     }
     
     private Node getNode(int index) {
@@ -152,7 +190,8 @@ public class MyLinkedList {
         Boolean clear = false;
         Boolean index = false;
         Boolean set = false;
-        Boolean add = true;
+        Boolean add = false;
+        Boolean remove = true;
         
         Integer[] nums = {0,1,2,3,4};
         if (addSize) {
@@ -247,6 +286,42 @@ public class MyLinkedList {
             
             a.add(6, new Integer(10));
             System.out.println(a);
+        }
+        
+        if (remove) {
+            Integer[] num4 = {0, 1, 2, 3, 4, 5};
+            for (Integer num : num4) {
+                a.add(num);
+            }
+            
+            System.out.println("2"+a.remove(num4[2]));
+            System.out.println(a);
+            
+            System.out.println("0"+a.remove(num4[0]));
+            System.out.println(a);
+            
+            System.out.println("10"+a.remove(new Integer(10)));
+            System.out.println(a);
+            
+            System.out.println("0"+a.remove(0));
+            System.out.println(a);
+            
+            System.out.println("2"+a.remove(2));
+            System.out.println(a);
+            
+            try {
+                System.out.println("10"+a.remove(10));
+                System.out.println(a);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Incorrect Index : 10");
+            }
+            
+            try {
+                System.out.println("-1"+a.remove(-1));
+                System.out.println(a);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Incorrect Index : -1");
+            }
         }
     }
 }
