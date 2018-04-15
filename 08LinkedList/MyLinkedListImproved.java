@@ -167,14 +167,14 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
             return -1;
         } else {
             T max = first.getValue();
-            int index = -1;
-            int maxIndex = -1;
+            int index = 0;
+            int maxIndex = 0;
             for (T value : this) {
-                index++;
                 if (value.compareTo(max) > 0) {
                     max = value;
                     maxIndex = index;
                 }
+                index++;
             }
             return maxIndex;
         }
@@ -185,14 +185,14 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
             return -1;
         } else {
             T min = first.getValue();
-            int index = -1;
-            int minIndex = -1;
+            int index = 0;
+            int minIndex = 0;
             for (T value : this) {
-                index++;
                 if (value.compareTo(min) < 0) {
                     min = value;
                     minIndex = index;
                 }
+                index++;
             }
             return minIndex;
         }
@@ -282,8 +282,8 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
         Boolean add = false;
         Boolean remove = false;
         Boolean iter = false;
-        Boolean maxMin = false;
-        Boolean extension = true;
+        Boolean maxMin = true;
+        Boolean extension = false;
         
         
         Integer[] nums = {0,1,2,3,4};
