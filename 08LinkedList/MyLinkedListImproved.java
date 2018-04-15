@@ -1,4 +1,4 @@
-import java.util.Iterator;
+import java.util.*;
 public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T>{
     private Node first, last;
     private int length;
@@ -156,12 +156,48 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
             if (hasNext()) {
                 current = current.getNext();
             } else {
-                System.exit(0);
+                throw new NoSuchElementException();
             }
             return returnNode.getValue();
         }
     }
-            
+    
+    public int max() {
+        if (length == 0) {
+            return -1;
+        } else {
+            T max = first.getValue();
+            int index = -1;
+            int maxIndex = -1;
+            for (T value : this) {
+                index++;
+                if (value.compareTo(max) > 0) {
+                    max = value;
+                    maxIndex = index;
+                }
+            }
+            return maxIndex;
+        }
+    }
+    
+    public int min() {
+        if (length == 0) {
+            return -1;
+        } else {
+            T min = first.getValue();
+            int index = -1;
+            int minIndex = -1;
+            for (T value : this) {
+                index++;
+                if (value.compareTo(min) < 0) {
+                    min = value;
+                    minIndex = index;
+                }
+            }
+            return minIndex;
+        }
+    }
+    
     private Node getNode(int index) {
         if (index >= length || index < 0) {
             throw new IndexOutOfBoundsException();
@@ -232,6 +268,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
         Boolean add = false;
         Boolean remove = false;
         Boolean iter = false;
+        Boolean maxMin = true;
         
         Integer[] nums = {0,1,2,3,4};
         if (addSize) {
@@ -377,5 +414,26 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
                 System.out.println(num);
             }
         }
+        
+        if (maxMin) {
+            Integer[] num6 = {0, 1, 2, 3, 3, 3, 3, 3, 8, 9, -1};
+            
+            System.out.println(a);
+            
+            System.out.println("Max:"+a.max());
+            System.out.println("Min:"+a.min());
+            
+            for (Integer num : num6) {
+                a.add(num);
+            }
+            
+            System.out.println(a);
+            
+            System.out.println("Max:"+a.max());
+            System.out.println("Min:"+a.min());
+            
+            
+        }
+        
     }
 }
