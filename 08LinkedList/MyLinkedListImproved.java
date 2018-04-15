@@ -198,6 +198,20 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
         }
     }
     
+    public void extend(MyLinkedListImproved<T> other){
+        if (length == 0) {
+            first = other.first;
+        } else {
+            last.setNext(other.first);
+            last = other.last;
+        }
+        if (other.length != 0) {
+            other.first.setPrev(last);
+        }
+        length += other.length;
+        other.clear();
+    }
+    
     private Node getNode(int index) {
         if (index >= length || index < 0) {
             throw new IndexOutOfBoundsException();
@@ -268,7 +282,9 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
         Boolean add = false;
         Boolean remove = false;
         Boolean iter = false;
-        Boolean maxMin = true;
+        Boolean maxMin = false;
+        Boolean extension = true;
+        
         
         Integer[] nums = {0,1,2,3,4};
         if (addSize) {
@@ -431,6 +447,35 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
             
             System.out.println("Max:"+a.max());
             System.out.println("Min:"+a.min());
+            
+            
+        }
+        
+        if (extension) {
+            Integer[] num7 = {0, 1, 2, 3, 4};
+            MyLinkedListImproved<Integer> b = new MyLinkedListImproved<>();
+            MyLinkedListImproved<Integer> c = new MyLinkedListImproved<>();
+            
+            for (Integer num : num7) {
+                a.add(num);
+                b.add(0, num);
+            }
+            
+            System.out.println(a);
+            System.out.println(b);
+            a.extend(b);
+            System.out.println("Extended:" + a);
+            System.out.println(b);
+            
+            a.extend(c);
+            System.out.println("Extend a filled list with an empty one");
+            System.out.println(a);
+            System.out.println(b);
+            
+            b.extend(a);
+            System.out.println("Extend an empty list with a filled one");
+            System.out.println(a);
+            System.out.println(b);
             
             
         }
