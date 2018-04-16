@@ -1,6 +1,7 @@
 public class Sort{
     public static void radixsort (MyLinkedListImproved<Integer> data) {
-        @SuppressWarnings("unchecked") MyLinkedListImproved<Integer>[] set = new MyLinkedListImproved[1];
+        @SuppressWarnings("unchecked") MyLinkedListImproved<Integer>[] set = new MyLinkedListImproved[19];
+        if (data.size() == 0) {return;}
         for (int x = 0; x < set.length; x++) {
             set[x] = new MyLinkedListImproved<Integer>();
         }
@@ -8,6 +9,7 @@ public class Sort{
         for (int level = 0;level < counter;level++) {
             while (data.size() != 0) {
                 int index = ((int) ( (data.get(0) % Math.pow(10, level+1)) ))/ ((int)(Math.pow(10,level)));
+                index += 9;
                 set[index].add(data.get(0));
                 data.remove(0);
             }
