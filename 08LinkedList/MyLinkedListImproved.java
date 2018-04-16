@@ -121,8 +121,13 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     public T remove(int index) {
         Node current = getNode(index);
         if (index == 0) {
-            current.getNext().setPrev(null);
-            first = current.getNext();
+            if (length == 1) {
+                first = null;
+                last = null;
+            } else {
+                current.getNext().setPrev(null);
+                first = current.getNext();
+            }
         } else if (current == last) {
                 current.getPrev().setNext(null);
                 last = current.getPrev();
@@ -201,9 +206,12 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     public void extend(MyLinkedListImproved<T> other){
         if (length == 0) {
             first = other.first;
+            last = other.last;
         } else {
             last.setNext(other.first);
-            last = other.last;
+            if (other.last != null) {
+                last = other.last;
+            }
         }
         if (other.length != 0) {
             other.first.setPrev(last);
