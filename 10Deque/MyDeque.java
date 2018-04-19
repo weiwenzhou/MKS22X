@@ -22,6 +22,9 @@ public class MyDeque<T> {
     }
 
     public void addFirst(T value) {
+	if (value == null) {
+	    throw new NullPointerException();
+	}
 	if (start == end) {
 	    resize();
 	}
@@ -34,14 +37,17 @@ public class MyDeque<T> {
     }
 
     public void addLast(T value) {
+	if (value == null) {
+	    throw new NullPointerException();
+	}
 	if (start == end) {
 	    resize();
 	}
-	end++;
         if (end >= box.length) {
 	    end-= box.length;
 	}
 	box[end] = value;
+	end++;
 	length++;
     }
 
@@ -72,6 +78,7 @@ public class MyDeque<T> {
 
 	for (Integer num : nums) {
 	    a.addFirst(num);
+	    a.addLast(num);
 	    System.out.println(a);
 	}
 	a.addFirst(10);
