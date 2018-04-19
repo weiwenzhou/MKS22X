@@ -6,11 +6,16 @@ public class MyDeque<T> {
         this(10);
     }
     
+    @SuppressWarnings("unchecked")
     public MyDeque(int initialCapacity) {
-        @SuppressWarnings("unchecked") T[] boxtemp = new T[initialCapacity];
+	if (initialCapacity < 0) {
+	    throw new IllegalArgumentException();
+	}
+        box =(T[]) new Object[initialCapacity];
         start = 0;
         end = 0;
         length = 0;
     }
+
     
 }
