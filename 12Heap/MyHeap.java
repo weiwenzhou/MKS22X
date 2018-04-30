@@ -25,17 +25,21 @@ public class MyHeap {
                 if (pass) {
                     swap(current, (current-1)/2 );
                     current = (current-1)/2;
-                }
+                } else {
+		    current = 0;
+		}
             } else {
                 if (!pass) {
                     swap(current, (current-1)/2 );
                     current = (current-1)/2;
-                }
+                } else {
+		    current = 0;
+		}
             }
         }
     
     public String remove() {
-        
+	
     }
     
     public String peek() {
