@@ -39,6 +39,8 @@ public class MyHeap {
         }
     
     public String remove() {
+	box[0] = null;
+	swap(0, size-1);
 	
     }
     
