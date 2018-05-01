@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class MyHeap {
     private String[] box;
     private int size;
@@ -19,6 +20,7 @@ public class MyHeap {
         }
         box[size] = s;
         int current = size;
+	size++;
         while (current != 0) {
             boolean pass = box[current].compareTo(box[(current-1)/2]) > 0;
             if (setting) {
@@ -37,11 +39,12 @@ public class MyHeap {
 		}
             }
         }
+    }
     
     public String remove() {
 	box[0] = null;
 	swap(0, size-1);
-	
+	return "";
     }
     
     public String peek() {
@@ -64,5 +67,21 @@ public class MyHeap {
         String temp = box[current];
         box[current] = box[newIndex];
         box[newIndex] = box[current];
+    }
+
+    public String toString() {
+	return Arrays.toString(box);
+    }
+    
+    public static void main (String[] args) {
+	MyHeap a = new MyHeap();
+
+	a.add("c");
+	System.out.println(a);
+	a.add("b");
+	System.out.println(a);
+	a.add("e");
+	System.out.println(a);
+	
     }
 }
