@@ -31,7 +31,7 @@ public class MazeSolver{
           Location current = frontier.next();
           Location[] neighbors = maze.getNeighbors(current);
           maze.set(current.getX(), current.getY(), '.');
-          System.out.println(maze);
+          System.out.println("111"+maze.toStringColor());
           for (Location l : neighbors) {
               if (l.getX() == maze.end.getX() && l.getY() == maze.end.getY()) {
                   return true;
@@ -39,7 +39,7 @@ public class MazeSolver{
                   frontier.add(l);
                   maze.set(l.getX(), l.getY(), '?');
               }
-              System.out.println(maze);
+              System.out.println(maze.toStringColor());
           }
       }
     return false;
