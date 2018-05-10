@@ -29,7 +29,7 @@ public class Maze{
         for (int count = 0; count < 4; count++) {
             int r = L.getX() + moveSet[0][count];
             int c = L.getY() + moveSet[1][count];
-            if (maze[r][c] == ' ') {
+            if (maze[r][c] == ' ' || maze[r][c] == 'E') {
                 set.add(new Location(r,c, L));
             }
         }

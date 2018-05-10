@@ -35,7 +35,7 @@ public class MazeSolver{
           }
           System.out.println(maze.toString());
           try {
-            Thread.sleep(stop);
+            Thread.sleep(50);
           } catch (InterruptedException e) {}
           for (Location l : neighbors) {
               if (l.equals(maze.end)) {
@@ -46,7 +46,7 @@ public class MazeSolver{
               }
               System.out.println(maze.toString());
               try {
-                Thread.sleep(stop);
+                Thread.sleep(50);
               } catch (InterruptedException e) {}
           }
       }
@@ -58,8 +58,8 @@ public class MazeSolver{
   }
   
   public static void main(String[] args) {
-      MazeSolver a = new MazeSolver("data1.dat");
-      a.solve();
+      MazeSolver a = new MazeSolver("data2.dat");
+      System.out.println(a.solve(0));
   }
 }
 
