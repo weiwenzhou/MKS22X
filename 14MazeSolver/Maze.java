@@ -15,38 +15,34 @@ public class Maze{
   YOU MUST COMPLETE THIS METHOD!!!
   YOU MUST COMPLETE THIS METHOD!!!
   */
-  public Location[] getNeighbors(Location L){
-      Location[] set = new Location[4];
-      int count = 0;
-      for (int x = 0; x < set.length; x++) {
-	  set[x] = null;
-      }
-      if (maze[L.getY()-1][L.getX()] == ' ') {
-	  set[0] = new Location(L.getX(), L.getY()-1, L);
-	  count++;
-      }
-      if (maze[L.getY()][L.getX()+1] == ' ') {
-	  set[1] = new Location(L.getX()+1, L.getY(), L);
-	  count++;
-      }
-      if (maze[L.getY()+1][L.getX()] == ' ') {
-	  set[2] = new Location(L.getX(), L.getY()+1, L);
-	  count++;
-      }
-      if (maze[L.getY()][L.getX()-1] == ' ') {
-	  set[3] = new Location(L.getX()-1, L.getY(), L);
-	  count++;
-      }
-      Location[] valid = new Location[count];
-      int num = 0;
-      for (Location l : set) {
-	  if (l != null) {
-	      valid[num] = l;
-	      num++;
-	  }
-      }
-      return valid;
-  }
+    public Location[] getNeighbors(Location L){
+        int[][] moveSet = new int[2][4];
+        
+        int[] x = {-1,0,0,1};
+        int[] y = {0,-1,1,0};
+        
+        moveSet[0] = x;
+        moveSet[1] = y;
+        
+        ArrayList<Location> set = new ArrayList<Location>();
+        
+        for (int count = 0; count < 4; count++) {
+            int r = L.getX() + moveSet[0][count];
+            int c = L.getY() + moveSet[1][count];
+            if (maze[r][c] == ' ') {
+                set.add(new Location(r,c, L));
+            }
+        }
+        
+        Location[] valid = new Location[set.size()];
+        
+        for (int i = 0; i < valid.length; i++) {
+            valid[i] = set.get(0);
+            set.remove(0);
+        }
+        
+        return valid;
+    }
 
   public Location getStart(){
     return start;
