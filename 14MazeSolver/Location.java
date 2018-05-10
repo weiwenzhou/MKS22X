@@ -20,4 +20,11 @@ public class Location {
 	return previous;
     }
     
+    public boolean equals(Location l) {
+        return x == l.getX() && y == l.getY();
+    }
+    
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
 }
