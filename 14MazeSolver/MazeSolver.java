@@ -30,16 +30,24 @@ public class MazeSolver{
       while (frontier.hasNext()) {
           Location current = frontier.next();
           Location[] neighbors = maze.getNeighbors(current);
-          maze.set(current.getX(), current.getY(), '.');
-          System.out.println("111"+maze.toStringColor());
+          if (! current.equals(maze.start) ) {
+            maze.set(current.getX(), current.getY(), '.');
+          }
+          System.out.println(maze.toString());
+          try {
+            Thread.sleep(stop);
+          } catch (InterruptedException e) {}
           for (Location l : neighbors) {
-              if (l.getX() == maze.end.getX() && l.getY() == maze.end.getY()) {
+              if (l.equals(maze.end)) {
                   return true;
               } else {
                   frontier.add(l);
                   maze.set(l.getX(), l.getY(), '?');
               }
-              System.out.println(maze.toStringColor());
+              System.out.println(maze.toString());
+              try {
+                Thread.sleep(stop);
+              } catch (InterruptedException e) {}
           }
       }
     return false;
