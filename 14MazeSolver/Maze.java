@@ -51,6 +51,9 @@ public class Maze{
     return end;
   }
 
+    public int getDistanceFromEnd() {
+
+    }
 
   private static String go(int x,int y){
     return ("\033[" + x + ";" + y + "H");

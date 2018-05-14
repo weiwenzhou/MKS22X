@@ -26,6 +26,12 @@ public class MazeSolver{
       if (mode == 1) {
           frontier = new FrontierStack();
       }
+      if (mode == 2) {
+	  frontier = new FrontierPriorityQueue();
+      }
+      if (mode == 3) {
+	  frontier = new FrontierPriorityQueue();
+      }
       frontier.add(maze.start);
       while (frontier.hasNext()) {
           Location current = frontier.next();
