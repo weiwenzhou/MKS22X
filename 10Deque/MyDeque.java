@@ -81,6 +81,7 @@ public class MyDeque<T> {
         if (start >= box.length) {
             start -= box.length;
         }
+        length--;
         return val;
     }
     
@@ -94,6 +95,7 @@ public class MyDeque<T> {
         if (end < 0) {
             end += box.length;
         }
+        length--;
         return val;
     }
     
