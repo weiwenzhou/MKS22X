@@ -6,14 +6,15 @@ public class MyHeap<T extends Comparable<T>> {
     public MyHeap() {
         this(true);
     }
-    
+
+    @SuppressWarnings("unchecked")
     public MyHeap(boolean mode) {
-        box = new String[10];
+        box = new T[10];
         size = 0;
         setting = mode;
     }
     
-    public void add(String s) {
+    public void add(T s) {
         if (size == box.length) {
             resize();
         }
@@ -33,8 +34,8 @@ public class MyHeap<T extends Comparable<T>> {
         }    
     }
     
-    public String remove() {
-        String str = box[0];
+    public T remove() {
+        T str = box[0];
         box[0] = null;
         swap(0, size-1);
         size--;
@@ -57,7 +58,7 @@ public class MyHeap<T extends Comparable<T>> {
         return str;
     }
     
-    public String peek() {
+    public T peek() {
         return box[0];
     }
     
@@ -65,8 +66,9 @@ public class MyHeap<T extends Comparable<T>> {
         return size;
     }
     
+    @SuppressWarnings("unchecked")
     private void resize() {
-        String[] pandora = new String[box.length*2];
+        T[] pandora = new T[box.length*2];
         for (int x = 0; x < size; x++) {
             pandora[x] = box[x];
         }
@@ -74,7 +76,7 @@ public class MyHeap<T extends Comparable<T>> {
     }
     
     private void swap(int current, int newIndex) {
-        String temp = box[current];
+        T temp = box[current];
         box[current] = box[newIndex];
         box[newIndex] = temp;
     }
@@ -88,13 +90,19 @@ public class MyHeap<T extends Comparable<T>> {
     }
     
     public static void main (String[] args) {
-        MyHeap a = new MyHeap();
+        MyHeap<Integer> a = new MyHeap<Integer>();
 
-        a.add("c");
+        a.add(10);
         System.out.println(a);
-        a.add("b");
+        a.add(4);
         System.out.println(a);
-        a.add("e");
+        a.add(9);
+        System.out.println(a);
+        a.add(1);
+        System.out.println(a);
+        a.add(2);
+        System.out.println(a);
+        a.add(7);
         System.out.println(a);
         
         System.out.println(a.remove());
