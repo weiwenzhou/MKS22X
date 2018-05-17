@@ -9,7 +9,7 @@ public class MyHeap<T extends Comparable<T>> {
 
     @SuppressWarnings("unchecked")
     public MyHeap(boolean mode) {
-        box = new T[10];
+        box = (T[]) new Comparable[10];
         size = 0;
         setting = mode;
     }
@@ -22,12 +22,12 @@ public class MyHeap<T extends Comparable<T>> {
         int current = size;
         size++;
         if (setting) {
-            while (current != 0 && box[(current-1)/2].compareTo(box[current]) > 0) {
+            while (current != 0 && box[(current-1)/2].compareTo(box[current]) < 0) {
                 swap(current, (current-1)/2);
                 current = (current-1)/2;
             }
         } else {
-            while (current != 0 && box[(current-1)/2].compareTo(box[current]) < 0) {
+            while (current != 0 && box[(current-1)/2].compareTo(box[current]) > 0) {
                 swap(current, (current-1)/2);
                 current = (current-1)/2;
             }
@@ -40,8 +40,8 @@ public class MyHeap<T extends Comparable<T>> {
         swap(0, size-1);
         size--;
         int current = 0;
-        while ( 2 * current + 1 < size && box[2*current+1].compareTo(box[current]) > 0 &&
-        2 * current + 2 < size && box[2*current+2].compareTo(box[current]) < 0 ) {
+        while (  (2 * current + 1 < size && box[2*current+1].compareTo(box[current]) < 0) ||
+        (2 * current + 2 < size && box[2*current+2].compareTo(box[current]) < 0) ) {
             if (2 * current + 2 < size) {
                 if ( box[2*current+1].compareTo(box[2*current+2]) < 0) {
                     swap(current, 2*current+2);
@@ -68,7 +68,7 @@ public class MyHeap<T extends Comparable<T>> {
     
     @SuppressWarnings("unchecked")
     private void resize() {
-        T[] pandora = new T[box.length*2];
+        T[] pandora = (T[]) new Comparable[box.length*2];
         for (int x = 0; x < size; x++) {
             pandora[x] = box[x];
         }
@@ -107,7 +107,7 @@ public class MyHeap<T extends Comparable<T>> {
         
         System.out.println(a.remove());
         System.out.println(a);
-        a.add("z");
+        a.add(20);
         System.out.println(a);
         System.out.println(a.remove());
         System.out.println(a);
